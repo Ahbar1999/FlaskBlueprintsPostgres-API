@@ -15,7 +15,7 @@ def submit_post():
     print(request)
     data = request.get_json()
     print('data',data) 
-    session.add(Post(message=data['message'], location=data['location']))
+    session.add(Post(message=data['message'], location=f'POINT( {data["location"]["lat"]} {data["location"]["long"]} )'))
     session.commit()
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
